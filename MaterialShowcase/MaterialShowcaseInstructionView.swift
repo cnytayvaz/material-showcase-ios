@@ -89,7 +89,7 @@ public class MaterialShowcaseInstructionView: UIView {
     primaryLabel.frame = CGRect(x: 0,
                                 y: 0,
                                 width: frame.width,
-                                height: 0)
+                                height: heightForView(text: primaryText, font: primaryLabel.font, width: frame.width))
     primaryLabel.sizeToFitHeight()
     addSubview(primaryLabel)
   }
@@ -106,16 +106,26 @@ public class MaterialShowcaseInstructionView: UIView {
     secondaryLabel.textAlignment = .left
     secondaryLabel.lineBreakMode = NSLineBreakMode.byWordWrapping
     secondaryLabel.text = secondaryText
-    secondaryLabel.numberOfLines = 3
+    secondaryLabel.numberOfLines = 0
     
     secondaryLabel.frame = CGRect(x: 0,
                                   y: primaryLabel.frame.height,
                                   width: frame.width,
-                                  height: 0)
+                                  height: heightForView(text: secondaryText, font: secondaryLabel.font, width: frame.width))
     secondaryLabel.sizeToFitHeight()
     addSubview(secondaryLabel)
     frame = CGRect(x: frame.minX, y: frame.minY, width: UIScreen.main.bounds.width, height: primaryLabel.frame.height + secondaryLabel.frame.height)
   }
+    
+    private func heightForView(text:String, font:UIFont, width:CGFloat) -> CGFloat{
+        let label:UILabel = UILabel(frame: CGRect(x: 0, y: 0, width: width, height: CGFloat.greatestFiniteMagnitude))
+        label.numberOfLines = 5
+        label.lineBreakMode = NSLineBreakMode.byWordWrapping
+        label.font = font
+        label.text = text
+        label.sizeToFit()
+        return label.frame.height
+    }
   
   /// Overrides this to add subviews. They will be drawn when calling show()
   public override func layoutSubviews() {
