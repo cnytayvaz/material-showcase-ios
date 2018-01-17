@@ -259,11 +259,7 @@ extension MaterialShowcase {
     
     let center = getOuterCircleCenterPoint(for: targetCopyView)
     
-    if UIDevice.current.userInterfaceIdiom == .pad {
-      radius = 600.0
-    } else {
-      radius = getOuterCircleRadius(center: center, textBounds: instructionView.frame, targetBounds: targetCopyView.frame)
-    }
+    radius = getOuterCircleRadius(center: center, textBounds: instructionView.frame, targetBounds: targetCopyView.frame)
     
     backgroundView = UIView(frame: CGRect(x: 0, y: 0, width: radius * 2,height: radius * 2))
     backgroundView.center = center
